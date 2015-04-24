@@ -1,13 +1,11 @@
 package repositories.impl;
 
 import java.sql.Connection;
-import java.util.List;
 
-import repositories.IParticipantRepository;
 import unitofwork.IUnitOfWork;
 import domain.Participant;
 
-public class ParticipantRepository extends Repository<Participant> implements IParticipantRepository 
+public class ParticipantRepository extends Repository<Participant> //implements IParticipantRepository 
 {
 	public ParticipantRepository(Connection connection, IEntityBuilder<Participant> builder, IUnitOfWork uow) 
 	{
@@ -26,16 +24,13 @@ public class ParticipantRepository extends Repository<Participant> implements IP
 
 	protected String getInsert() 
 	{
+		//System.out.println("Blad dodania do bazy");
 		return "INSERT INTO participants VALUES(NULL,'?','?','?','?','?','?','?');";
 	}
 
 	
 	
-	public List<Participant> withParticipant(Participant participants) {
-		
-		return null;
-	}
-
+	
 	@Override
 	protected void setUpUpdate(Participant entity) throws Exception 
 	{

@@ -18,6 +18,7 @@ public class ParticipantBuilder implements IEntityBuilder<Participant>
 		result.setSuperior(rs.getString("superior"));
 		result.setInfo(rs.getString("info"));
 		result.setText(rs.getString("text"));
+
 		return result;
 	}
 }

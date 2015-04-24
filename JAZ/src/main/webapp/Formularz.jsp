@@ -10,7 +10,7 @@
 
 <h1>Zgloszenie na konferencje</h1>
 
-<form action="AddParticipant" method="get">
+<form action="AddParticipant" method="post">
 <table>
 <tr><td>Imie:</td><td><input type="text" name ="firstName"/></td></tr>
 <tr><td>Nazwisko:</td><td><input type="text" name ="lastName"/></td></tr>

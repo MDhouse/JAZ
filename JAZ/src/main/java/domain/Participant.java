@@ -1,7 +1,5 @@
 package domain;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class Participant extends Entity
 {
@@ -13,17 +11,26 @@ public class Participant extends Entity
 	private String superior;
 	private String info;
 	private String text;
-	private List<Participant> participants;
+	//private List<Participant> participants;
 	
 	public Participant()
 	{
-		this.setParticipants(new ArrayList<Participant>());
+		super();
 	}
-	public Participant(String lastName)
+	
+	public Participant(String firstName, String lastName, String email, String emailAuthenticate, String superior, String info,String text) 
 	{
 		super();
-		this.lastName=lastName;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.emailAuthenticate = emailAuthenticate;
+		this.superior = superior;
+		this.info = info;
+		this.text = text;
+		
 	}
+
 	public String getFirstName() 
 	{
 		return firstName;
@@ -79,13 +86,4 @@ public class Participant extends Entity
 	{
 		this.text = text;
 	}
-
-	public List<Participant> getParticipants() {
-		return participants;
-	}
-
-	public void setParticipants(List<Participant> participants) {
-		this.participants = participants;
-	}
-
 }

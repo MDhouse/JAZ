@@ -11,8 +11,7 @@ import unitofwork.IUnitOfWork;
 import unitofwork.IUnitOfWorkRepository;
 import domain.Entity;
 
-public abstract class Repository <TEntity extends Entity> 
-implements IRepository<TEntity>, IUnitOfWorkRepository
+public abstract class Repository <TEntity extends Entity> implements IRepository<TEntity>, IUnitOfWorkRepository
 {
 	protected Connection connection;
 	protected IEntityBuilder<TEntity> builder;
@@ -24,6 +23,7 @@ implements IRepository<TEntity>, IUnitOfWorkRepository
 	{
 		this.connection = connection;
 		this.builder = builder;
+		this.uow = uow;
 			
 		try 
 		{
@@ -78,6 +78,7 @@ implements IRepository<TEntity>, IUnitOfWorkRepository
 		catch(Exception e) 
 		{
 			e.printStackTrace();	
+			System.out.println("Blad update");
 		}
 	}
 
@@ -85,13 +86,14 @@ implements IRepository<TEntity>, IUnitOfWorkRepository
 	{
 	try 
 	{
-		PreparedStatement stt = connection.prepareStatement("DELETE FROM "+ getTableName() +" WHERE id=?;");
+		PreparedStatement stt = connection.prepareStatement("DELETE FROM " + getTableName() + " WHERE id=?;");
 		stt.setInt(1, entity.getId());
 		stt.execute();
 	} 
 	catch (Exception e) 
 	{
 		e.printStackTrace();
+		System.out.println("Blad delete");
 	}
 	}
 
@@ -99,7 +101,7 @@ implements IRepository<TEntity>, IUnitOfWorkRepository
 	{
 
 		try {
-			PreparedStatement stt = connection.prepareStatement("SELECT * FROM "+ getTableName() +" WHERE id=?;");
+			PreparedStatement stt = connection.prepareStatement("SELECT * FROM " + getTableName() + " WHERE id=?;");
 			stt.setInt(1, id);
 			ResultSet rs = stt.executeQuery();
 			while(rs.next())
@@ -108,6 +110,7 @@ implements IRepository<TEntity>, IUnitOfWorkRepository
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			System.out.println("Blad select");
 		}
 		
 		return null;
@@ -118,16 +121,19 @@ implements IRepository<TEntity>, IUnitOfWorkRepository
 		List<TEntity> result = new ArrayList<TEntity>();
 		
 		try 
-		{	PreparedStatement stt = connection.prepareStatement("SELECT * FROM "+ getTableName() +";");
+		{	PreparedStatement stt = connection.prepareStatement("SELECT * FROM " + getTableName() + ";");
 			ResultSet rs= stt.executeQuery();
 			while(rs.next())
 			{
+				
 				result.add(builder.build(rs));
+				System.out.println("builder po while");
 			}
 		} 
 		catch (Exception e) 
 		{
 			e.printStackTrace();
+			System.out.println("Blad metoda getAll()");
 		}
 		
 		return result;

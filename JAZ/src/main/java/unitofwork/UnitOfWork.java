@@ -23,7 +23,7 @@ public class UnitOfWork implements IUnitOfWork
 		{
 			connection.setAutoCommit(false);
 		} 
-		catch (Exception e) 
+		catch (SQLException e) 
 		{
 			e.printStackTrace();
 		}
