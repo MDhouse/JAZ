@@ -63,7 +63,7 @@ public class AddParticipantServlet extends HttpServlet {
 							"PRIMARY KEY(id)" +
 							");");*/
 					
-					participantRepository = new ParticipantRepository(connection, new ParticipantBuilder(), uow);
+					participantRepository  = new ParticipantRepository(connection, new ParticipantBuilder(), uow);
 						
 				}
 			catch (Exception e)
@@ -106,6 +106,7 @@ public class AddParticipantServlet extends HttpServlet {
 					
 					
 					Participant p = new Participant(firstName, lastName, email, emailAuthenticate, superior, info, text);
+					
 				/*	p.setFirstName(firstName);
 					p.setLastName(lastName);
 					p.setEmail(email);
@@ -113,7 +114,7 @@ public class AddParticipantServlet extends HttpServlet {
 					p.setSuperior(superior);
 					p.setInfo(info);
 					p.setText(text);*/
-					saveParticipant(p);
+					//saveParticipant(p);
 				
 				if(numberOfPeople == 0)
 					{
@@ -141,6 +142,7 @@ public class AddParticipantServlet extends HttpServlet {
 		{
 			participantRepository.save(p);
 			uow.commit();
+			System.out.println("Wykonanie metody");
 		}
 
 	
